@@ -3,7 +3,7 @@
 // (index.html JSON-LD, README.md) — nothing is invented.
 
 export const CARD_URL =
-  process.env.CARD_URL || 'https://karthick-a.github.io/portfolio/card/';
+  process.env.CARD_URL || 'https://karthick-card.vercel.app/';
 
 export const person = {
   first: 'Karthick',

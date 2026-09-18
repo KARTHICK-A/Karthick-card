@@ -37,8 +37,8 @@ node build/build.mjs          # re-run so sw.js hashes the new files
 After the first deploy, point the print sheet and the PDF at the real address:
 
 ```sh
-CARD_URL=https://<project>.vercel.app/ node build/build.mjs
-CARD_URL=https://<project>.vercel.app/ node build/details.mjs && node build/pdf.mjs
+CARD_URL=https://karthick-card.vercel.app/ node build/build.mjs
+CARD_URL=https://karthick-card.vercel.app/ node build/details.mjs && node build/pdf.mjs
 ```
 
 The **page** QR shown in the browser is built from `location` at runtime, so it
