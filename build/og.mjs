@@ -1,6 +1,6 @@
 // Dumps the contact QR module matrix so build/og.py can draw the OG image.
 import { writeFileSync } from 'node:fs';
-import { make } from './build.mjs';
+import { make } from './qr.mjs';
 import { vcardQR } from './data.mjs';
 const c = make(vcardQR), n = c.getModuleCount();
 const rows = [];

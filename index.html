@@ -3,272 +3,222 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Karthick A — contact card</title>
 <meta name="description" content="Scan to save the contact details of Karthick A, Embedded Systems Engineer at Spark Invotech Pvt Ltd — automotive ECU electronics, PCB design and industrial IoT.">
 <link rel="canonical" href="https://karthick-card.vercel.app/">
-<meta name="theme-color" content="#04060c">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#04060c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#eef1f6" media="(prefers-color-scheme: light)">
 <meta property="og:type" content="profile">
-<meta property="og:title" content="Karthick A — Embedded Systems Engineer">
-<meta property="og:description" content="Scan to save my contact. Automotive ECU electronics, PCB design and industrial IoT.">
+<meta property="og:site_name" content="Karthick A — contact card">
+<meta property="og:title" content="Karthick A — contact card">
+<meta property="og:description" content="Scan to save the contact details of Karthick A, Embedded Systems Engineer at Spark Invotech Pvt Ltd — automotive ECU electronics, PCB design and industrial IoT.">
 <meta property="og:url" content="https://karthick-card.vercel.app/">
 <meta property="og:image" content="https://karthick-card.vercel.app/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Karthick A, Embedded Systems Engineer, Spark Invotech Pvt Ltd">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2304060c'/%3E%3Cg fill='%2322e0e6'%3E%3Crect x='2' y='2' width='5' height='5'/%3E%3Crect x='9' y='2' width='5' height='5'/%3E%3Crect x='2' y='9' width='5' height='5'/%3E%3Crect x='9' y='9' width='2' height='2'/%3E%3Crect x='12' y='12' width='2' height='2'/%3E%3C/g%3E%3C/svg%3E">
-<style>
-/* ---- self-hosted faces: one display (Unbounded), one text (IBM Plex Mono) ---- */
-@font-face{font-family:'Unbounded';src:url(fonts/unbounded-latin-var.woff2) format('woff2');
-  font-weight:200 900;font-style:normal;font-display:swap;
-  unicode-range:U+0000-00FF,U+2000-206F,U+2212;}
-@font-face{font-family:'Plex Mono';src:url(fonts/plexmono-400-latin.woff2) format('woff2');
-  font-weight:400;font-style:normal;font-display:swap;}
-@font-face{font-family:'Plex Mono';src:url(fonts/plexmono-500-latin.woff2) format('woff2');
-  font-weight:500;font-style:normal;font-display:swap;}
-
-/* ---- tokens ----
-   Dark is the default (it matches the owner's portfolio). Light is a real
-   inversion, not a tint. Contrast on --bg, measured:
-     dark  : --ink 17.8:1  --body 11.6:1  --muted 6.4:1  --accent 11.2:1
-     light : --ink 17.4:1  --body  9.6:1  --muted 5.0:1  --accent  5.3:1
-   The QR plate is always #fff / #000 regardless of theme. */
-:root{
-  --bg:#04060c; --plate:#070b14; --line:#1b2437; --line-2:#2a3550;
-  --ink:#edf1fa; --body:#c2cbde; --muted:#8b96af;
-  --accent:#22e0e6; --accent-ink:#04060c;
-  --disp:'Unbounded',system-ui,sans-serif;
-  --text:'Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-  --pad:20px; --r:4px;
-}
-@media (prefers-color-scheme:light){
-  :root:not([data-theme="dark"]){
-    --bg:#eef1f6; --plate:#ffffff; --line:#c9d1e0; --line-2:#aab5c9;
-    --ink:#0a0f1a; --body:#333d51;
-    --muted:#5b667d; --accent:#0d7c85; --accent-ink:#ffffff;
-  }
-}
-:root[data-theme="light"]{
-  --bg:#eef1f6; --plate:#ffffff; --line:#c9d1e0; --line-2:#aab5c9;
-  --ink:#0a0f1a; --body:#333d51;
-  --muted:#5b667d; --accent:#0d7c85; --accent-ink:#ffffff;
-}
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{
-  margin:0;background:var(--bg);color:var(--body);
-  font-family:var(--text);font-size:15px;line-height:1.6;
-  /* faint grid — reads as a board substrate, not decoration */
-  background-image:
-    linear-gradient(var(--line) 1px,transparent 1px),
-    linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:44px 44px;background-position:center top;
-}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) body{background-image:none}}
-:root[data-theme="light"] body{background-image:none}
-main{max-width:520px;margin:0 auto;padding:var(--pad) var(--pad) 56px}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
-
-/* ---- identity ---- */
-.id{padding:28px 0 22px;border-bottom:1px solid var(--line-2)}
-.who{display:flex;align-items:center;gap:14px}
-.avatar{width:72px;height:72px;border-radius:50%;object-fit:cover;
-  border:1px solid var(--line-2);flex:0 0 auto;filter:grayscale(1) contrast(1.05)}
-.refdes{font-size:.72rem;letter-spacing:.16em;color:var(--accent);margin:0 0 10px;font-weight:500}
-h1{font-family:var(--disp);font-weight:700;font-size:clamp(1.85rem,8vw,2.6rem);
-   line-height:1;letter-spacing:-.02em;color:var(--ink);margin:0}
-.role{margin:12px 0 0;color:var(--ink);font-weight:500}
-.org{margin:2px 0 0;color:var(--muted)}
-.blurb{margin:12px 0 0;color:var(--body);max-width:34ch}
-
-/* ---- the QR is the hero ---- */
-.stage{margin:26px 0 0}
-.plate{background:#fff;border:1px solid var(--line-2);border-radius:var(--r);
-  padding:18px;display:flex;align-items:center;justify-content:center}
-.plate canvas{display:block;width:100%;height:auto;image-rendering:pixelated}
-.plate .nojs{color:#000;font-size:.8rem;text-align:center;padding:36px 12px;line-height:1.5}
-.caption{display:flex;gap:10px;align-items:baseline;justify-content:space-between;
-  margin:10px 2px 0;font-size:.78rem;color:var(--muted)}
-.caption b{color:var(--ink);font-weight:500;letter-spacing:.04em}
-
-.seg{display:flex;margin:16px 0 0;border:1px solid var(--line-2);border-radius:var(--r);overflow:hidden}
-.seg button{flex:1;appearance:none;background:transparent;border:0;border-right:1px solid var(--line-2);
-  color:var(--muted);font:inherit;font-size:.78rem;letter-spacing:.06em;padding:11px 8px;cursor:pointer;min-height:44px}
-.seg button:last-child{border-right:0}
-.seg button[aria-pressed=true]{background:var(--accent);color:var(--accent-ink);font-weight:500}
-
-.save{display:flex;align-items:center;justify-content:center;gap:8px;margin:10px 0 0;
-  min-height:48px;padding:12px;border:1px solid var(--accent);border-radius:var(--r);
-  background:var(--accent);color:var(--accent-ink);font-weight:500;text-decoration:none}
-
-/* ---- link rows: open on the left, copy on the right ---- */
-h2{font-family:var(--disp);font-weight:500;font-size:.9rem;color:var(--muted);
-   margin:34px 0 0;letter-spacing:.02em}
-ul{list-style:none;margin:10px 0 0;padding:0;border-top:1px solid var(--line)}
-li{border-bottom:1px solid var(--line);display:flex;align-items:stretch;gap:8px}
-li a{flex:1;display:flex;align-items:baseline;gap:14px;padding:14px 2px;text-decoration:none;min-height:44px}
-li a:hover .lv{color:var(--accent)}
-.lk{flex:0 0 5.4rem;font-size:.74rem;letter-spacing:.1em;color:var(--muted)}
-.lv{color:var(--ink);word-break:break-word}
-.copy{flex:0 0 auto;align-self:center;appearance:none;background:transparent;
-  border:1px solid var(--line-2);border-radius:var(--r);color:var(--muted);
-  font:inherit;font-size:.68rem;letter-spacing:.1em;padding:9px 11px;min-height:38px;cursor:pointer}
-.copy:hover{border-color:var(--accent);color:var(--accent)}
-.copy[data-done=true]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-
-footer{margin:30px 0 0;font-size:.72rem;color:var(--muted);line-height:1.7}
-footer a{color:var(--accent)}
-
-.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
-  background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:var(--r);
-  font-size:.78rem;z-index:60}
-.toast[hidden]{display:none}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-@media (min-width:640px){:root{--pad:32px} main{max-width:560px}}
-@media print{body{background:#fff}.seg,.save,.copy{display:none}}
-</style>
+<meta name="twitter:title" content="Karthick A — contact card">
+<meta name="twitter:description" content="Scan to save the contact details of Karthick A, Embedded Systems Engineer at Spark Invotech Pvt Ltd — automotive ECU electronics, PCB design and industrial IoT.">
+<meta name="twitter:image" content="https://karthick-card.vercel.app/og.png">
+<link rel="icon" href="assets/img/icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="fonts/unbounded-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/plexsans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
+<script src="assets/theme.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Karthick A","jobTitle":"Embedded Systems Engineer","worksFor":{"@type":"Organization","name":"Spark Invotech Pvt Ltd"},"address":{"@type":"PostalAddress","addressLocality":"Chennai","addressCountry":"IN"},"url":"https://karthick-card.vercel.app/","image":"https://karthick-card.vercel.app/portrait.webp","sameAs":["https://karthick-a.github.io/portfolio/","https://linkedin.com/in/karthick-a-83a352211","https://github.com/KARTHICK-A"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Projects by Karthick A","itemListElement":[{"@type":"ListItem","position":1,"url":"https://karthick-card.vercel.app/work/dual-fuel-ecu.html","name":"Dual-Fuel Engine Control Unit"},{"@type":"ListItem","position":2,"url":"https://karthick-card.vercel.app/work/injector-multiplier.html","name":"Injector Multiplier"},{"@type":"ListItem","position":3,"url":"https://karthick-card.vercel.app/work/acoustic-vehicle-alerting.html","name":"Acoustic Vehicle Alerting System"},{"@type":"ListItem","position":4,"url":"https://karthick-card.vercel.app/work/oil-control-unit.html","name":"Oil Control Unit"},{"@type":"ListItem","position":5,"url":"https://karthick-card.vercel.app/work/compressor-monitoring.html","name":"Compressor Health & Power Monitoring"},{"@type":"ListItem","position":6,"url":"https://karthick-card.vercel.app/work/cold-chamber-logger.html","name":"Cold Chamber Data Logging System"},{"@type":"ListItem","position":7,"url":"https://karthick-card.vercel.app/work/production-quantity-monitoring.html","name":"Production Quantity Monitoring System"}]}</script>
 </head>
 <body>
-<main>
-  <header class="id">
-    <p class="refdes">TP1 · CONTACT</p>
+<a class="skip" href="#main">Skip to content</a>
+<svg class="sprite" aria-hidden="true" focusable="false"><defs><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol><symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol><symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol><symbol id="i-code" viewBox="0 0 24 24"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 5l-4 14"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></symbol><symbol id="i-share" viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="m8.2 10.8 7.6-3.6M8.2 13.2l7.6 3.6"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol><symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5m6-6-6 6 6 6"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></symbol><symbol id="i-zoom" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.2-4.2M11 8v6M8 11h6"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol><symbol id="i-chev-left" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></symbol><symbol id="i-chev-right" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol><symbol id="mark" viewBox="0 0 16 16"><rect width="16" height="16" rx="3" fill="#04060c"/><g fill="#22e0e6"><rect x="2" y="2" width="5" height="5"/><rect x="9" y="2" width="5" height="5"/><rect x="2" y="9" width="5" height="5"/><rect x="9" y="9" width="2" height="2"/><rect x="12" y="12" width="2" height="2"/></g></symbol></defs></svg>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="index.html" aria-label="Karthick A — home">
+      <svg class="mark" aria-hidden="true" focusable="false"><use href="#mark"/></svg><span class="brand-name">Karthick A</span>
+    </a>
+    <nav class="nav" aria-label="Main"><a href="work.html">Work</a><a href="about.html">About</a><a href="index.html#contact">Contact</a></nav>
+    <button class="icon-btn theme" type="button" aria-label="Switch to light theme"><svg class="i i-sun" aria-hidden="true" focusable="false"><use href="#i-sun"/></svg><svg class="i i-moon" aria-hidden="true" focusable="false"><use href="#i-moon"/></svg></button>
+  </div>
+</header>
+<main id="main" class="wrap">
+
+<section class="hero" aria-labelledby="name">
+  <div class="ident">
+    <p class="eyebrow">TP1 · Contact</p>
     <div class="who">
-      <img class="avatar" src="portrait.webp" width="72" height="72" alt="" loading="lazy">
-      <h1>Karthick A</h1>
+      <img class="avatar" src="portrait.webp" width="92" height="92" alt="" decoding="async">
+      <div>
+        <h1 id="name">Karthick A</h1>
+      </div>
     </div>
     <p class="role">Embedded Systems Engineer</p>
     <p class="org">Spark Invotech Pvt Ltd · Chennai, India</p>
     <p class="blurb">Automotive ECU electronics, PCB design and industrial IoT.</p>
-  </header>
+  </div>
 
-  <section class="stage" aria-labelledby="qrh">
-    <h2 id="qrh" class="sr">Scan code</h2>
-    <div class="plate">
-      <canvas id="qr" width="1" height="1" role="img"
-              aria-label="QR code containing the contact details of Karthick A"></canvas>
-      <noscript><p class="nojs">Scannable code needs JavaScript.<br>All contact details are listed below, and
-        <a href="contact.vcf">contact.vcf</a> downloads without it.</p></noscript>
+  <section class="qr card" aria-labelledby="qr-h">
+    <div class="qr-head"><h2 id="qr-h">Scan to save my contact</h2><span class="qr-meta" id="qrmeta">v12 · ECC M</span></div>
+    <div class="plate" id="plate"><svg class="qr-svg" role="img" aria-label="QR code containing the contact details of Karthick A" viewBox="0 0 73 73" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect width="73" height="73" fill="#fff"/><path fill="#000" d="M4 4h7v1h-7zM15 4h1v1h-1zM17 4h1v1h-1zM19 4h1v1h-1zM23 4h6v1h-6zM30 4h2v1h-2zM34 4h2v1h-2zM37 4h1v1h-1zM39 4h2v1h-2zM46 4h2v1h-2zM49 4h1v1h-1zM51 4h2v1h-2zM55 4h3v1h-3zM59 4h1v1h-1zM62 4h7v1h-7zM4 5h1v1h-1zM10 5h1v1h-1zM15 5h4v1h-4zM20 5h6v1h-6zM29 5h2v1h-2zM32 5h2v1h-2zM40 5h2v1h-2zM43 5h1v1h-1zM45 5h2v1h-2zM52 5h1v1h-1zM55 5h2v1h-2zM60 5h1v1h-1zM62 5h1v1h-1zM68 5h1v1h-1zM4 6h1v1h-1zM6 6h3v1h-3zM10 6h1v1h-1zM12 6h2v1h-2zM15 6h2v1h-2zM21 6h2v1h-2zM25 6h4v1h-4zM30 6h1v1h-1zM32 6h3v1h-3zM37 6h3v1h-3zM43 6h2v1h-2zM47 6h2v1h-2zM55 6h2v1h-2zM58 6h1v1h-1zM60 6h1v1h-1zM62 6h1v1h-1zM64 6h3v1h-3zM68 6h1v1h-1zM4 7h1v1h-1zM6 7h3v1h-3zM10 7h1v1h-1zM12 7h6v1h-6zM19 7h1v1h-1zM21 7h2v1h-2zM25 7h2v1h-2zM29 7h2v1h-2zM32 7h11v1h-11zM45 7h3v1h-3zM49 7h4v1h-4zM54 7h1v1h-1zM57 7h3v1h-3zM62 7h1v1h-1zM64 7h3v1h-3zM68 7h1v1h-1zM4 8h1v1h-1zM6 8h3v1h-3zM10 8h1v1h-1zM12 8h1v1h-1zM15 8h1v1h-1zM18 8h1v1h-1zM21 8h2v1h-2zM26 8h1v1h-1zM34 8h6v1h-6zM45 8h2v1h-2zM53 8h1v1h-1zM56 8h1v1h-1zM60 8h1v1h-1zM62 8h1v1h-1zM64 8h3v1h-3zM68 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM12 9h1v1h-1zM14 9h3v1h-3zM18 9h1v1h-1zM22 9h2v1h-2zM25 9h1v1h-1zM31 9h1v1h-1zM33 9h2v1h-2zM38 9h2v1h-2zM42 9h3v1h-3zM46 9h1v1h-1zM48 9h2v1h-2zM51 9h1v1h-1zM55 9h1v1h-1zM57 9h2v1h-2zM62 9h1v1h-1zM68 9h1v1h-1zM4 10h7v1h-7zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM28 10h1v1h-1zM30 10h1v1h-1zM32 10h1v1h-1zM34 10h1v1h-1zM36 10h1v1h-1zM38 10h1v1h-1zM40 10h1v1h-1zM42 10h1v1h-1zM44 10h1v1h-1zM46 10h1v1h-1zM48 10h1v1h-1zM50 10h1v1h-1zM52 10h1v1h-1zM54 10h1v1h-1zM56 10h1v1h-1zM58 10h1v1h-1zM60 10h1v1h-1zM62 10h7v1h-7zM12 11h2v1h-2zM16 11h3v1h-3zM20 11h2v1h-2zM24 11h2v1h-2zM28 11h1v1h-1zM30 11h1v1h-1zM33 11h2v1h-2zM38 11h1v1h-1zM40 11h1v1h-1zM42 11h3v1h-3zM48 11h1v1h-1zM54 11h4v1h-4zM60 11h1v1h-1zM4 12h1v1h-1zM6 12h5v1h-5zM18 12h1v1h-1zM20 12h1v1h-1zM22 12h1v1h-1zM24 12h2v1h-2zM27 12h1v1h-1zM29 12h1v1h-1zM32 12h1v1h-1zM34 12h5v1h-5zM40 12h1v1h-1zM42 12h1v1h-1zM45 12h1v1h-1zM47 12h1v1h-1zM49 12h1v1h-1zM51 12h2v1h-2zM54 12h1v1h-1zM57 12h3v1h-3zM62 12h5v1h-5zM4 13h1v1h-1zM6 13h1v1h-1zM14 13h1v1h-1zM16 13h4v1h-4zM21 13h1v1h-1zM24 13h1v1h-1zM27 13h1v1h-1zM29 13h3v1h-3zM34 13h1v1h-1zM36 13h1v1h-1zM39 13h3v1h-3zM43 13h2v1h-2zM46 13h2v1h-2zM51 13h3v1h-3zM56 13h1v1h-1zM58 13h2v1h-2zM67 13h2v1h-2zM4 14h7v1h-7zM13 14h2v1h-2zM16 14h2v1h-2zM19 14h2v1h-2zM22 14h1v1h-1zM24 14h6v1h-6zM31 14h1v1h-1zM34 14h4v1h-4zM39 14h1v1h-1zM41 14h1v1h-1zM44 14h1v1h-1zM47 14h6v1h-6zM55 14h1v1h-1zM58 14h2v1h-2zM65 14h2v1h-2zM5 15h1v1h-1zM7 15h1v1h-1zM9 15h1v1h-1zM12 15h4v1h-4zM17 15h6v1h-6zM24 15h1v1h-1zM26 15h2v1h-2zM32 15h3v1h-3zM36 15h1v1h-1zM38 15h1v1h-1zM40 15h2v1h-2zM43 15h3v1h-3zM48 15h1v1h-1zM50 15h1v1h-1zM53 15h1v1h-1zM56 15h3v1h-3zM67 15h1v1h-1zM4 16h1v1h-1zM6 16h2v1h-2zM9 16h3v1h-3zM14 16h2v1h-2zM17 16h1v1h-1zM21 16h1v1h-1zM23 16h2v1h-2zM26 16h1v1h-1zM28 16h2v1h-2zM31 16h1v1h-1zM34 16h2v1h-2zM37 16h1v1h-1zM40 16h4v1h-4zM45 16h3v1h-3zM49 16h5v1h-5zM57 16h4v1h-4zM62 16h6v1h-6zM4 17h2v1h-2zM8 17h2v1h-2zM11 17h2v1h-2zM14 17h1v1h-1zM18 17h1v1h-1zM20 17h1v1h-1zM22 17h1v1h-1zM27 17h2v1h-2zM30 17h1v1h-1zM33 17h1v1h-1zM36 17h1v1h-1zM39 17h2v1h-2zM43 17h1v1h-1zM46 17h3v1h-3zM52 17h2v1h-2zM55 17h5v1h-5zM63 17h1v1h-1zM65 17h1v1h-1zM68 17h1v1h-1zM4 18h1v1h-1zM7 18h1v1h-1zM10 18h2v1h-2zM18 18h1v1h-1zM22 18h3v1h-3zM26 18h1v1h-1zM29 18h2v1h-2zM33 18h3v1h-3zM37 18h1v1h-1zM39 18h1v1h-1zM41 18h2v1h-2zM44 18h1v1h-1zM46 18h2v1h-2zM49 18h4v1h-4zM54 18h1v1h-1zM56 18h1v1h-1zM60 18h2v1h-2zM63 18h1v1h-1zM65 18h1v1h-1zM67 18h1v1h-1zM5 19h2v1h-2zM8 19h1v1h-1zM11 19h1v1h-1zM16 19h1v1h-1zM18 19h1v1h-1zM20 19h1v1h-1zM29 19h2v1h-2zM32 19h1v1h-1zM34 19h1v1h-1zM37 19h1v1h-1zM39 19h1v1h-1zM41 19h1v1h-1zM44 19h1v1h-1zM46 19h3v1h-3zM50 19h1v1h-1zM52 19h4v1h-4zM58 19h1v1h-1zM61 19h2v1h-2zM65 19h1v1h-1zM67 19h1v1h-1zM5 20h1v1h-1zM10 20h1v1h-1zM15 20h1v1h-1zM18 20h7v1h-7zM26 20h4v1h-4zM31 20h2v1h-2zM34 20h2v1h-2zM40 20h1v1h-1zM43 20h1v1h-1zM45 20h2v1h-2zM49 20h1v1h-1zM51 20h3v1h-3zM55 20h1v1h-1zM58 20h1v1h-1zM60 20h1v1h-1zM62 20h3v1h-3zM68 20h1v1h-1zM7 21h3v1h-3zM11 21h1v1h-1zM14 21h4v1h-4zM23 21h2v1h-2zM27 21h1v1h-1zM29 21h2v1h-2zM33 21h1v1h-1zM36 21h1v1h-1zM40 21h1v1h-1zM46 21h2v1h-2zM49 21h1v1h-1zM51 21h2v1h-2zM55 21h1v1h-1zM57 21h3v1h-3zM61 21h1v1h-1zM63 21h1v1h-1zM65 21h1v1h-1zM67 21h2v1h-2zM5 22h1v1h-1zM8 22h1v1h-1zM10 22h1v1h-1zM12 22h1v1h-1zM14 22h1v1h-1zM16 22h2v1h-2zM21 22h3v1h-3zM25 22h3v1h-3zM31 22h4v1h-4zM38 22h1v1h-1zM41 22h5v1h-5zM48 22h1v1h-1zM50 22h3v1h-3zM58 22h1v1h-1zM60 22h1v1h-1zM62 22h1v1h-1zM66 22h1v1h-1zM4 23h3v1h-3zM9 23h1v1h-1zM11 23h2v1h-2zM14 23h1v1h-1zM16 23h3v1h-3zM20 23h1v1h-1zM22 23h1v1h-1zM27 23h1v1h-1zM29 23h1v1h-1zM33 23h2v1h-2zM41 23h3v1h-3zM45 23h1v1h-1zM55 23h1v1h-1zM59 23h1v1h-1zM61 23h3v1h-3zM65 23h1v1h-1zM5 24h2v1h-2zM8 24h1v1h-1zM10 24h2v1h-2zM13 24h6v1h-6zM23 24h1v1h-1zM27 24h3v1h-3zM31 24h2v1h-2zM34 24h2v1h-2zM37 24h1v1h-1zM39 24h2v1h-2zM42 24h1v1h-1zM45 24h2v1h-2zM51 24h2v1h-2zM54 24h1v1h-1zM57 24h2v1h-2zM60 24h1v1h-1zM63 24h2v1h-2zM9 25h1v1h-1zM11 25h1v1h-1zM13 25h2v1h-2zM16 25h2v1h-2zM19 25h1v1h-1zM21 25h1v1h-1zM23 25h2v1h-2zM27 25h2v1h-2zM33 25h1v1h-1zM35 25h1v1h-1zM37 25h1v1h-1zM40 25h2v1h-2zM43 25h4v1h-4zM48 25h1v1h-1zM51 25h3v1h-3zM55 25h1v1h-1zM57 25h3v1h-3zM63 25h2v1h-2zM66 25h3v1h-3zM4 26h1v1h-1zM9 26h3v1h-3zM14 26h1v1h-1zM19 26h1v1h-1zM21 26h1v1h-1zM24 26h1v1h-1zM27 26h2v1h-2zM30 26h1v1h-1zM34 26h2v1h-2zM38 26h1v1h-1zM40 26h1v1h-1zM42 26h2v1h-2zM50 26h1v1h-1zM54 26h2v1h-2zM62 26h1v1h-1zM64 26h2v1h-2zM6 27h1v1h-1zM9 27h1v1h-1zM12 27h1v1h-1zM14 27h1v1h-1zM16 27h4v1h-4zM28 27h1v1h-1zM30 27h1v1h-1zM34 27h1v1h-1zM38 27h1v1h-1zM40 27h1v1h-1zM43 27h1v1h-1zM46 27h1v1h-1zM48 27h1v1h-1zM50 27h2v1h-2zM54 27h1v1h-1zM56 27h2v1h-2zM60 27h2v1h-2zM63 27h3v1h-3zM4 28h1v1h-1zM7 28h2v1h-2zM10 28h3v1h-3zM18 28h3v1h-3zM22 28h1v1h-1zM24 28h1v1h-1zM28 28h2v1h-2zM32 28h2v1h-2zM39 28h5v1h-5zM45 28h3v1h-3zM50 28h3v1h-3zM55 28h1v1h-1zM57 28h1v1h-1zM60 28h2v1h-2zM63 28h2v1h-2zM66 28h1v1h-1zM5 29h3v1h-3zM9 29h1v1h-1zM12 29h1v1h-1zM18 29h2v1h-2zM21 29h1v1h-1zM23 29h1v1h-1zM25 29h1v1h-1zM27 29h1v1h-1zM29 29h2v1h-2zM33 29h1v1h-1zM35 29h3v1h-3zM40 29h2v1h-2zM45 29h4v1h-4zM55 29h4v1h-4zM64 29h2v1h-2zM67 29h2v1h-2zM4 30h1v1h-1zM7 30h1v1h-1zM10 30h1v1h-1zM12 30h5v1h-5zM18 30h2v1h-2zM24 30h1v1h-1zM26 30h4v1h-4zM33 30h1v1h-1zM35 30h1v1h-1zM37 30h1v1h-1zM39 30h2v1h-2zM42 30h1v1h-1zM44 30h1v1h-1zM49 30h1v1h-1zM52 30h1v1h-1zM54 30h1v1h-1zM56 30h2v1h-2zM62 30h1v1h-1zM64 30h1v1h-1zM5 31h2v1h-2zM11 31h2v1h-2zM14 31h1v1h-1zM16 31h1v1h-1zM19 31h3v1h-3zM23 31h1v1h-1zM25 31h1v1h-1zM27 31h1v1h-1zM31 31h1v1h-1zM33 31h2v1h-2zM36 31h3v1h-3zM40 31h3v1h-3zM44 31h3v1h-3zM51 31h2v1h-2zM54 31h1v1h-1zM57 31h3v1h-3zM61 31h1v1h-1zM63 31h1v1h-1zM67 31h1v1h-1zM5 32h1v1h-1zM7 32h1v1h-1zM10 32h2v1h-2zM19 32h3v1h-3zM24 32h2v1h-2zM27 32h1v1h-1zM29 32h1v1h-1zM37 32h2v1h-2zM40 32h4v1h-4zM45 32h3v1h-3zM50 32h5v1h-5zM58 32h1v1h-1zM60 32h5v1h-5zM66 32h3v1h-3zM4 33h3v1h-3zM8 33h1v1h-1zM16 33h1v1h-1zM19 33h1v1h-1zM21 33h2v1h-2zM25 33h3v1h-3zM29 33h3v1h-3zM34 33h3v1h-3zM39 33h2v1h-2zM43 33h6v1h-6zM57 33h3v1h-3zM63 33h1v1h-1zM67 33h1v1h-1zM4 34h2v1h-2zM7 34h8v1h-8zM17 34h1v1h-1zM19 34h1v1h-1zM25 34h1v1h-1zM29 34h2v1h-2zM34 34h6v1h-6zM42 34h3v1h-3zM49 34h2v1h-2zM54 34h2v1h-2zM60 34h8v1h-8zM8 35h1v1h-1zM12 35h1v1h-1zM14 35h2v1h-2zM17 35h1v1h-1zM20 35h4v1h-4zM25 35h2v1h-2zM29 35h3v1h-3zM33 35h2v1h-2zM38 35h1v1h-1zM40 35h4v1h-4zM45 35h1v1h-1zM50 35h1v1h-1zM52 35h4v1h-4zM58 35h1v1h-1zM60 35h1v1h-1zM64 35h2v1h-2zM4 36h1v1h-1zM8 36h1v1h-1zM10 36h1v1h-1zM12 36h1v1h-1zM15 36h4v1h-4zM20 36h1v1h-1zM23 36h1v1h-1zM25 36h4v1h-4zM31 36h2v1h-2zM34 36h1v1h-1zM36 36h1v1h-1zM38 36h2v1h-2zM42 36h1v1h-1zM44 36h1v1h-1zM47 36h5v1h-5zM54 36h2v1h-2zM59 36h2v1h-2zM62 36h1v1h-1zM64 36h1v1h-1zM66 36h2v1h-2zM5 37h4v1h-4zM12 37h1v1h-1zM15 37h1v1h-1zM19 37h1v1h-1zM21 37h2v1h-2zM34 37h1v1h-1zM38 37h1v1h-1zM41 37h5v1h-5zM48 37h1v1h-1zM50 37h1v1h-1zM53 37h2v1h-2zM57 37h2v1h-2zM60 37h1v1h-1zM64 37h1v1h-1zM66 37h2v1h-2zM4 38h1v1h-1zM8 38h8v1h-8zM18 38h2v1h-2zM23 38h2v1h-2zM26 38h1v1h-1zM28 38h1v1h-1zM34 38h6v1h-6zM44 38h1v1h-1zM46 38h4v1h-4zM51 38h1v1h-1zM56 38h1v1h-1zM58 38h1v1h-1zM60 38h5v1h-5zM66 38h1v1h-1zM6 39h1v1h-1zM8 39h2v1h-2zM15 39h2v1h-2zM18 39h1v1h-1zM20 39h1v1h-1zM22 39h1v1h-1zM28 39h2v1h-2zM31 39h3v1h-3zM36 39h1v1h-1zM41 39h5v1h-5zM48 39h1v1h-1zM53 39h1v1h-1zM55 39h4v1h-4zM62 39h1v1h-1zM64 39h2v1h-2zM67 39h2v1h-2zM7 40h1v1h-1zM10 40h1v1h-1zM13 40h1v1h-1zM15 40h1v1h-1zM17 40h1v1h-1zM19 40h5v1h-5zM26 40h1v1h-1zM32 40h3v1h-3zM37 40h1v1h-1zM39 40h2v1h-2zM42 40h1v1h-1zM45 40h1v1h-1zM47 40h1v1h-1zM52 40h1v1h-1zM60 40h4v1h-4zM66 40h3v1h-3zM4 41h3v1h-3zM8 41h1v1h-1zM12 41h3v1h-3zM19 41h3v1h-3zM25 41h1v1h-1zM28 41h2v1h-2zM35 41h1v1h-1zM37 41h2v1h-2zM40 41h1v1h-1zM43 41h4v1h-4zM51 41h2v1h-2zM57 41h3v1h-3zM64 41h1v1h-1zM68 41h1v1h-1zM7 42h1v1h-1zM10 42h2v1h-2zM14 42h3v1h-3zM19 42h3v1h-3zM24 42h2v1h-2zM29 42h3v1h-3zM36 42h1v1h-1zM40 42h3v1h-3zM44 42h1v1h-1zM46 42h2v1h-2zM52 42h1v1h-1zM55 42h2v1h-2zM58 42h3v1h-3zM63 42h1v1h-1zM65 42h1v1h-1zM4 43h1v1h-1zM6 43h2v1h-2zM9 43h1v1h-1zM12 43h2v1h-2zM15 43h2v1h-2zM18 43h7v1h-7zM26 43h2v1h-2zM29 43h1v1h-1zM31 43h4v1h-4zM36 43h1v1h-1zM38 43h1v1h-1zM40 43h2v1h-2zM43 43h2v1h-2zM46 43h1v1h-1zM48 43h3v1h-3zM54 43h3v1h-3zM59 43h1v1h-1zM61 43h2v1h-2zM65 43h1v1h-1zM67 43h1v1h-1zM8 44h1v1h-1zM10 44h1v1h-1zM13 44h5v1h-5zM19 44h2v1h-2zM24 44h3v1h-3zM31 44h1v1h-1zM38 44h1v1h-1zM40 44h1v1h-1zM43 44h1v1h-1zM46 44h2v1h-2zM49 44h1v1h-1zM51 44h4v1h-4zM61 44h2v1h-2zM64 44h4v1h-4zM4 45h1v1h-1zM8 45h1v1h-1zM12 45h1v1h-1zM17 45h1v1h-1zM19 45h3v1h-3zM23 45h1v1h-1zM27 45h2v1h-2zM35 45h1v1h-1zM37 45h5v1h-5zM43 45h1v1h-1zM45 45h4v1h-4zM51 45h1v1h-1zM53 45h1v1h-1zM57 45h4v1h-4zM62 45h3v1h-3zM66 45h1v1h-1zM68 45h1v1h-1zM4 46h1v1h-1zM9 46h7v1h-7zM17 46h3v1h-3zM21 46h3v1h-3zM27 46h1v1h-1zM29 46h2v1h-2zM33 46h1v1h-1zM36 46h1v1h-1zM38 46h2v1h-2zM44 46h1v1h-1zM46 46h2v1h-2zM49 46h2v1h-2zM52 46h1v1h-1zM54 46h1v1h-1zM58 46h2v1h-2zM63 46h2v1h-2zM66 46h1v1h-1zM9 47h1v1h-1zM12 47h1v1h-1zM14 47h4v1h-4zM21 47h2v1h-2zM27 47h1v1h-1zM30 47h5v1h-5zM36 47h2v1h-2zM42 47h3v1h-3zM48 47h1v1h-1zM53 47h5v1h-5zM60 47h5v1h-5zM68 47h1v1h-1zM5 48h2v1h-2zM8 48h5v1h-5zM20 48h1v1h-1zM22 48h5v1h-5zM28 48h4v1h-4zM34 48h2v1h-2zM38 48h3v1h-3zM42 48h1v1h-1zM47 48h1v1h-1zM51 48h2v1h-2zM54 48h2v1h-2zM57 48h2v1h-2zM60 48h1v1h-1zM63 48h1v1h-1zM66 48h2v1h-2zM5 49h1v1h-1zM8 49h2v1h-2zM12 49h1v1h-1zM15 49h1v1h-1zM19 49h1v1h-1zM21 49h2v1h-2zM24 49h3v1h-3zM37 49h3v1h-3zM41 49h1v1h-1zM45 49h2v1h-2zM53 49h1v1h-1zM56 49h4v1h-4zM61 49h2v1h-2zM64 49h4v1h-4zM5 50h3v1h-3zM9 50h3v1h-3zM14 50h6v1h-6zM21 50h4v1h-4zM27 50h1v1h-1zM30 50h1v1h-1zM33 50h1v1h-1zM35 50h1v1h-1zM37 50h1v1h-1zM39 50h1v1h-1zM41 50h1v1h-1zM43 50h2v1h-2zM46 50h1v1h-1zM49 50h3v1h-3zM54 50h4v1h-4zM60 50h1v1h-1zM64 50h1v1h-1zM66 50h1v1h-1zM6 51h1v1h-1zM8 51h2v1h-2zM15 51h2v1h-2zM18 51h1v1h-1zM20 51h1v1h-1zM22 51h1v1h-1zM24 51h4v1h-4zM30 51h1v1h-1zM33 51h2v1h-2zM38 51h2v1h-2zM42 51h1v1h-1zM44 51h7v1h-7zM52 51h1v1h-1zM54 51h4v1h-4zM59 51h3v1h-3zM63 51h3v1h-3zM4 52h2v1h-2zM8 52h1v1h-1zM10 52h1v1h-1zM13 52h5v1h-5zM19 52h4v1h-4zM24 52h2v1h-2zM27 52h3v1h-3zM32 52h3v1h-3zM36 52h1v1h-1zM40 52h1v1h-1zM43 52h1v1h-1zM45 52h1v1h-1zM49 52h4v1h-4zM54 52h1v1h-1zM58 52h1v1h-1zM60 52h3v1h-3zM67 52h2v1h-2zM4 53h1v1h-1zM11 53h1v1h-1zM15 53h1v1h-1zM17 53h1v1h-1zM20 53h1v1h-1zM23 53h2v1h-2zM27 53h2v1h-2zM30 53h1v1h-1zM34 53h2v1h-2zM43 53h1v1h-1zM46 53h4v1h-4zM52 53h2v1h-2zM55 53h1v1h-1zM57 53h2v1h-2zM64 53h1v1h-1zM67 53h2v1h-2zM7 54h2v1h-2zM10 54h1v1h-1zM12 54h3v1h-3zM16 54h1v1h-1zM19 54h1v1h-1zM22 54h1v1h-1zM24 54h1v1h-1zM26 54h4v1h-4zM31 54h2v1h-2zM37 54h1v1h-1zM40 54h4v1h-4zM45 54h1v1h-1zM48 54h6v1h-6zM57 54h1v1h-1zM60 54h1v1h-1zM63 54h1v1h-1zM66 54h1v1h-1zM4 55h1v1h-1zM6 55h3v1h-3zM12 55h2v1h-2zM17 55h3v1h-3zM21 55h3v1h-3zM25 55h1v1h-1zM30 55h1v1h-1zM32 55h1v1h-1zM34 55h2v1h-2zM38 55h2v1h-2zM46 55h3v1h-3zM53 55h1v1h-1zM55 55h2v1h-2zM58 55h4v1h-4zM63 55h1v1h-1zM65 55h1v1h-1zM67 55h1v1h-1zM4 56h3v1h-3zM8 56h4v1h-4zM14 56h1v1h-1zM17 56h3v1h-3zM21 56h3v1h-3zM25 56h2v1h-2zM30 56h3v1h-3zM34 56h2v1h-2zM37 56h1v1h-1zM39 56h4v1h-4zM45 56h3v1h-3zM49 56h4v1h-4zM55 56h1v1h-1zM57 56h1v1h-1zM61 56h2v1h-2zM4 57h2v1h-2zM7 57h3v1h-3zM11 57h1v1h-1zM13 57h1v1h-1zM19 57h3v1h-3zM25 57h2v1h-2zM29 57h1v1h-1zM35 57h1v1h-1zM37 57h3v1h-3zM41 57h1v1h-1zM44 57h4v1h-4zM51 57h1v1h-1zM56 57h5v1h-5zM62 57h3v1h-3zM67 57h2v1h-2zM6 58h2v1h-2zM9 58h12v1h-12zM22 58h1v1h-1zM24 58h2v1h-2zM27 58h6v1h-6zM35 58h1v1h-1zM40 58h1v1h-1zM42 58h1v1h-1zM44 58h1v1h-1zM47 58h1v1h-1zM49 58h1v1h-1zM51 58h2v1h-2zM54 58h2v1h-2zM59 58h1v1h-1zM61 58h1v1h-1zM65 58h2v1h-2zM4 59h1v1h-1zM7 59h1v1h-1zM14 59h6v1h-6zM21 59h1v1h-1zM25 59h1v1h-1zM27 59h1v1h-1zM30 59h2v1h-2zM33 59h3v1h-3zM37 59h7v1h-7zM48 59h2v1h-2zM51 59h1v1h-1zM53 59h3v1h-3zM57 59h4v1h-4zM62 59h1v1h-1zM64 59h2v1h-2zM67 59h1v1h-1zM5 60h2v1h-2zM8 60h1v1h-1zM10 60h6v1h-6zM17 60h1v1h-1zM19 60h3v1h-3zM26 60h2v1h-2zM29 60h1v1h-1zM31 60h2v1h-2zM34 60h10v1h-10zM45 60h3v1h-3zM49 60h1v1h-1zM51 60h2v1h-2zM54 60h1v1h-1zM58 60h1v1h-1zM60 60h5v1h-5zM66 60h1v1h-1zM12 61h1v1h-1zM14 61h1v1h-1zM23 61h3v1h-3zM27 61h1v1h-1zM29 61h2v1h-2zM33 61h2v1h-2zM38 61h4v1h-4zM45 61h3v1h-3zM51 61h3v1h-3zM55 61h4v1h-4zM60 61h1v1h-1zM64 61h1v1h-1zM67 61h2v1h-2zM4 62h7v1h-7zM14 62h2v1h-2zM18 62h1v1h-1zM21 62h2v1h-2zM24 62h2v1h-2zM30 62h1v1h-1zM32 62h1v1h-1zM34 62h1v1h-1zM36 62h1v1h-1zM38 62h1v1h-1zM42 62h2v1h-2zM48 62h3v1h-3zM52 62h1v1h-1zM54 62h1v1h-1zM60 62h1v1h-1zM62 62h1v1h-1zM64 62h1v1h-1zM4 63h1v1h-1zM10 63h1v1h-1zM12 63h2v1h-2zM15 63h2v1h-2zM21 63h2v1h-2zM31 63h2v1h-2zM34 63h1v1h-1zM38 63h1v1h-1zM40 63h3v1h-3zM44 63h1v1h-1zM46 63h2v1h-2zM49 63h2v1h-2zM52 63h4v1h-4zM59 63h2v1h-2zM64 63h2v1h-2zM67 63h1v1h-1zM4 64h1v1h-1zM6 64h3v1h-3zM10 64h1v1h-1zM12 64h1v1h-1zM18 64h1v1h-1zM23 64h1v1h-1zM26 64h1v1h-1zM28 64h1v1h-1zM31 64h1v1h-1zM33 64h6v1h-6zM40 64h4v1h-4zM47 64h1v1h-1zM52 64h2v1h-2zM58 64h1v1h-1zM60 64h6v1h-6zM4 65h1v1h-1zM6 65h3v1h-3zM10 65h1v1h-1zM12 65h2v1h-2zM16 65h2v1h-2zM20 65h1v1h-1zM22 65h1v1h-1zM25 65h1v1h-1zM27 65h1v1h-1zM30 65h1v1h-1zM32 65h1v1h-1zM40 65h2v1h-2zM43 65h2v1h-2zM46 65h1v1h-1zM48 65h1v1h-1zM51 65h3v1h-3zM56 65h6v1h-6zM66 65h2v1h-2zM4 66h1v1h-1zM6 66h3v1h-3zM10 66h1v1h-1zM12 66h1v1h-1zM15 66h6v1h-6zM25 66h1v1h-1zM28 66h1v1h-1zM30 66h4v1h-4zM35 66h1v1h-1zM40 66h3v1h-3zM44 66h1v1h-1zM50 66h2v1h-2zM54 66h2v1h-2zM59 66h1v1h-1zM62 66h3v1h-3zM67 66h1v1h-1zM4 67h1v1h-1zM10 67h1v1h-1zM13 67h2v1h-2zM16 67h1v1h-1zM18 67h2v1h-2zM21 67h4v1h-4zM29 67h2v1h-2zM32 67h1v1h-1zM34 67h1v1h-1zM36 67h2v1h-2zM39 67h2v1h-2zM46 67h2v1h-2zM49 67h1v1h-1zM51 67h2v1h-2zM55 67h1v1h-1zM57 67h2v1h-2zM60 67h1v1h-1zM63 67h1v1h-1zM67 67h1v1h-1zM4 68h7v1h-7zM12 68h3v1h-3zM16 68h1v1h-1zM19 68h1v1h-1zM22 68h2v1h-2zM25 68h2v1h-2zM28 68h7v1h-7zM36 68h1v1h-1zM38 68h1v1h-1zM40 68h2v1h-2zM43 68h1v1h-1zM45 68h2v1h-2zM52 68h2v1h-2zM55 68h1v1h-1zM58 68h2v1h-2zM62 68h1v1h-1zM66 68h1v1h-1z"/></svg></div>
+    <p class="qr-hint" id="qrhint" aria-live="polite">Point your phone camera at the code. It adds my name, role, company, phone, both emails and website.</p>
+    <div class="qr-actions">
+      <a class="btn btn-primary" href="contact.vcf" download="karthick-a.vcf"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-download"/></svg>Save contact</a>
+      <button class="btn" type="button" id="share" hidden><svg class="i" aria-hidden="true" focusable="false"><use href="#i-share"/></svg>Share</button>
     </div>
-    <p class="caption"><b id="qrname">CONTACT CARD</b><span id="qrmeta"></span></p>
-
     <div class="seg" role="group" aria-label="Choose what the code contains">
-      <button type="button" id="tab-vcard" aria-pressed="true">CONTACT</button>
-      <button type="button" id="tab-url" aria-pressed="false">THIS PAGE</button>
+      <button type="button" id="tab-vcard" aria-pressed="true">Contact</button>
+      <button type="button" id="tab-url" aria-pressed="false">This page</button>
     </div>
-
-    <a class="save" href="contact.vcf" download="karthick-a.vcf">Save my contact</a>
   </section>
 
-  <h2>Contact</h2>
-  <ul>
-    <li><a href="mailto:karthick.rd.dev@gmail.com"><span class="lk">TECHNICAL</span><span class="lv">karthick.rd.dev@gmail.com</span></a>
-        <button type="button" class="copy" data-copy="karthick.rd.dev@gmail.com">COPY</button></li>
-    <li><a href="mailto:sparkinvotech.ceo@gmail.com"><span class="lk">BUSINESS</span><span class="lv">sparkinvotech.ceo@gmail.com</span></a>
-        <button type="button" class="copy" data-copy="sparkinvotech.ceo@gmail.com">COPY</button></li>
-    <li><a href="tel:+917094828457"><span class="lk">PHONE</span><span class="lv">+91 70948 28457</span></a>
-        <button type="button" class="copy" data-copy="+917094828457">COPY</button></li>
-    <li><a href="https://wa.me/917094828457" target="_blank" rel="noopener"><span class="lk">WHATSAPP</span><span class="lv">+91 70948 28457</span></a>
-        <button type="button" class="copy" data-copy="+917094828457">COPY</button></li>
-  </ul>
+  <div class="quick" role="group" aria-label="Get in touch quickly">
+      <a class="qbtn" href="tel:+917094828457"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span>Call</span></a>
+      <a class="qbtn" href="https://wa.me/917094828457" target="_blank" rel="noopener"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-chat"/></svg><span>WhatsApp</span><span class="sr"> (opens in a new tab)</span></a>
+      <a class="qbtn" href="mailto:karthick.rd.dev@gmail.com"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg><span>Email</span></a>
+  </div>
+</section>
 
-  <h2>Links</h2>
-  <ul>
-    <li><a href="https://karthick-a.github.io/portfolio/" target="_blank" rel="noopener"><span class="lk">PORTFOLIO</span><span class="lv">karthick-a.github.io/portfolio</span></a>
-        <button type="button" class="copy" data-copy="https://karthick-a.github.io/portfolio/">COPY</button></li>
-    <li><a href="https://linkedin.com/in/karthick-a-83a352211" target="_blank" rel="noopener"><span class="lk">LINKEDIN</span><span class="lv">in/karthick-a-83a352211</span></a>
-        <button type="button" class="copy" data-copy="https://linkedin.com/in/karthick-a-83a352211">COPY</button></li>
-    <li><a href="https://github.com/KARTHICK-A" target="_blank" rel="noopener"><span class="lk">GITHUB</span><span class="lv">KARTHICK-A</span></a>
-        <button type="button" class="copy" data-copy="https://github.com/KARTHICK-A">COPY</button></li>
-  </ul>
+<section aria-labelledby="work-h">
+  <div class="sec-head">
+    <div><p class="eyebrow">U1 – U7</p><h2 id="work-h">Selected work</h2></div>
+    <a class="more" href="work.html">All 7 projects <svg class="i i-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+  </div>
+  <div class="pgrid">
+      <article class="pcard">
+        <div class="pcard-media"><img src="assets/img/work/dual-fuel-ecu/field-test-sm.webp" width="720" height="405" alt="ECU running on a marine engine at sea" loading="lazy" decoding="async"><span class="pcard-ref">U1</span><span class="pill on-media pill-verified">Marine-verified</span></div>
+        <div class="pcard-body">
+          <p class="label">Automotive</p>
+          <h3 class="pcard-title"><a href="work/dual-fuel-ecu.html">Dual-Fuel Engine Control Unit <small>(LPG/CNG)</small></a></h3>
+          <p class="pcard-sum">Verified on a running marine engine under load. Final build shrank to a bare ATtiny3216.</p>
+          <ul class="chips" aria-label="Technologies"><li>ATtiny3216 (final)</li><li>ATmega / Arduino</li><li>ESP32 (pilot)</li><li>ADS1115</li></ul>
+          <span class="pcard-go" aria-hidden="true">View project <svg class="i i-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+        </div>
+      </article>
+      <article class="pcard">
+        <div class="pcard-media"><img src="assets/img/work/injector-multiplier/product-sm.webp" width="720" height="481" alt="Injector multiplier unit with 4 output harnesses" loading="lazy" decoding="async"><span class="pcard-ref">U2</span><span class="pill on-media pill-spec">4 to 16 channels</span></div>
+        <div class="pcard-body">
+          <p class="label">Power electronics</p>
+          <h3 class="pcard-title"><a href="work/injector-multiplier.html">Injector Multiplier</a></h3>
+          <p class="pcard-sum">Four injector channels multiplied to sixteen, at 12 V / 8 A peak per channel.</p>
+          <ul class="chips" aria-label="Technologies"><li>MOSFET drive</li><li>Flyback protection</li><li>Reverse-polarity protection</li><li>Custom PCB</li></ul>
+          <span class="pcard-go" aria-hidden="true">View project <svg class="i i-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+        </div>
+      </article>
+      <article class="pcard">
+        <div class="pcard-media"><svg class="chipart" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><path class="tr" d="M92 60H0"/><path class="tr" d="M228 60H320"/><path class="tr" d="M92 80H0"/><path class="tr" d="M228 80H320"/><path class="tr tr-a" d="M92 100H0"/><path class="tr tr-a" d="M228 100H320"/><path class="tr" d="M92 120H0"/><path class="tr" d="M228 120H320"/><path class="tr" d="M92 140H0"/><path class="tr" d="M228 140H320"/><circle class="via" cx="48" cy="80" r="5"/><circle class="via" cx="268" cy="120" r="5"/><rect class="body" x="104" y="40" width="112" height="120" rx="6"/><rect class="pin" x="92" y="56" width="12" height="8"/><rect class="pin" x="216" y="56" width="12" height="8"/><rect class="pin" x="92" y="76" width="12" height="8"/><rect class="pin" x="216" y="76" width="12" height="8"/><rect class="pin" x="92" y="96" width="12" height="8"/><rect class="pin" x="216" y="96" width="12" height="8"/><rect class="pin" x="92" y="116" width="12" height="8"/><rect class="pin" x="216" y="116" width="12" height="8"/><rect class="pin" x="92" y="136" width="12" height="8"/><rect class="pin" x="216" y="136" width="12" height="8"/><circle class="p1" cx="120" cy="56" r="3.5"/><text x="160" y="108" text-anchor="middle">U6</text></svg><span class="pcard-ref">U6</span><span class="pill on-media pill-delivered">Delivered</span></div>
+        <div class="pcard-body">
+          <p class="label">Delphi TVS</p>
+          <h3 class="pcard-title"><a href="work/cold-chamber-logger.html">Cold Chamber Data Logging System</a></h3>
+          <p class="pcard-sum">Three distributed nodes proving the −20 °C soak is reached, not assumed. Delivered to Delphi TVS.</p>
+          <ul class="chips" aria-label="Technologies"><li>ESP32</li><li>RS485 half-duplex</li><li>LoRa E32 (~200 m)</li><li>SPIFFS flash log</li></ul>
+          <span class="pcard-go" aria-hidden="true">View project <svg class="i i-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></span>
+        </div>
+      </article>
+  </div>
+</section>
 
-  <h2>Documents</h2>
-  <ul>
-    <li><a href="Karthick-A-details.pdf" download><span class="lk">DETAILS</span><span class="lv">Full profile PDF &nbsp;·&nbsp; 1 page</span></a>
-        <button type="button" class="copy" data-copy="https://karthick-card.vercel.app/Karthick-A-details.pdf">COPY</button></li>
-    <li><a href="Karthick-A-resume.pdf" download><span class="lk">RÉSUMÉ</span><span class="lv">Karthick-A-resume.pdf</span></a>
-        <button type="button" class="copy" data-copy="https://karthick-card.vercel.app/Karthick-A-resume.pdf">COPY</button></li>
-  </ul>
+<section aria-labelledby="about-h">
+  <div class="card teaser">
+    <div>
+      <h2 id="about-h">Profile</h2>
+      <p class="lead">Co-founder at <strong>Spark Invotech</strong>, a DPIIT-recognized embedded systems company. Automotive ECU electronics, PCB design and industrial IoT.</p>
+      <ul class="chips" aria-label="Capabilities"><li>ECU &amp; engine electronics</li><li>Hardware &amp; PCB</li><li>Firmware</li><li>Protocols &amp; IoT</li><li>Test &amp; debug</li></ul>
+    </div>
+    <a class="btn" href="about.html">Read the profile <svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></a>
+  </div>
+</section>
 
-  <footer>
-    <p>Works offline once loaded. <a href="print.html">Print sheet</a> — business card and A5 table tent.</p>
-  </footer>
+<section id="contact" aria-labelledby="contact-h">
+  <div class="sec-head"><div><h2 id="contact-h">Get in touch</h2></div></div>
+  <div class="cgrid">
+    <div class="card contact-card"><h3>Contact</h3><ul class="rows">
+      <li class="row">
+        <a class="row-main" href="mailto:karthick.rd.dev@gmail.com">
+          <span class="row-ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></span>
+          <span class="row-txt"><span class="row-k">Email · technical</span><span class="row-v">karthick.rd.dev@<wbr>gmail.com</span></span>
+        </a>
+        <button class="icon-btn copy" type="button" data-copy="karthick.rd.dev@gmail.com" data-label="Technical email" aria-label="Copy technical email"><svg class="i i-copy" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg><svg class="i i-check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+      </li>
+      <li class="row">
+        <a class="row-main" href="mailto:sparkinvotech.ceo@gmail.com">
+          <span class="row-ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></span>
+          <span class="row-txt"><span class="row-k">Email · business</span><span class="row-v">sparkinvotech.ceo@<wbr>gmail.com</span></span>
+        </a>
+        <button class="icon-btn copy" type="button" data-copy="sparkinvotech.ceo@gmail.com" data-label="Business email" aria-label="Copy business email"><svg class="i i-copy" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg><svg class="i i-check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+      </li>
+      <li class="row">
+        <a class="row-main" href="tel:+917094828457">
+          <span class="row-ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg></span>
+          <span class="row-txt"><span class="row-k">Phone</span><span class="row-v">+91&nbsp;70948&nbsp;28457</span></span>
+        </a>
+        <button class="icon-btn copy" type="button" data-copy="+917094828457" data-label="Phone number" aria-label="Copy phone number"><svg class="i i-copy" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg><svg class="i i-check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+      </li>
+      <li class="row">
+        <a class="row-main" href="https://wa.me/917094828457" target="_blank" rel="noopener">
+          <span class="row-ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-chat"/></svg></span>
+          <span class="row-txt"><span class="row-k">WhatsApp</span><span class="row-v">+91&nbsp;70948&nbsp;28457</span></span><span class="sr"> (opens in a new tab)</span>
+        </a>
+        <button class="icon-btn copy" type="button" data-copy="+917094828457" data-label="WhatsApp number" aria-label="Copy whatsapp number"><svg class="i i-copy" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg><svg class="i i-check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+      </li>
+    </ul>
+      <div class="card-foot"><a class="btn btn-primary" href="contact.vcf" download="karthick-a.vcf"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-download"/></svg>Save contact</a></div></div>
+    <div class="cstack">
+      <div class="card"><h3>Links</h3><ul class="rows">
+      <li class="row">
+        <a class="row-main" href="https://karthick-a.github.io/portfolio/" target="_blank" rel="noopener">
+          <span class="row-ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-globe"/></svg></span>
+          <span class="row-txt"><span class="row-k">Portfolio</span><span class="row-v">karthick-a.github.io/<wbr>portfolio</span></span><span class="sr"> (opens in a new tab)</span>
+        </a>
+        <button class="icon-btn copy" type="button" data-copy="https://karthick-a.github.io/portfolio/" data-label="Portfolio link" aria-label="Copy portfolio link"><svg class="i i-copy" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg><svg class="i i-check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+      </li>
+      <li class="row">
+        <a class="row-main" href="https://linkedin.com/in/karthick-a-83a352211" target="_blank" rel="noopener">
+          <span class="row-ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-briefcase"/></svg></span>
+          <span class="row-txt"><span class="row-k">LinkedIn</span><span class="row-v">in/<wbr>karthick-a-83a352211</span></span><span class="sr"> (opens in a new tab)</span>
+        </a>
+        <button class="icon-btn copy" type="button" data-copy="https://linkedin.com/in/karthick-a-83a352211" data-label="LinkedIn link" aria-label="Copy linkedin link"><svg class="i i-copy" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg><svg class="i i-check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+      </li>
+      <li class="row">
+        <a class="row-main" href="https://github.com/KARTHICK-A" target="_blank" rel="noopener">
+          <span class="row-ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-code"/></svg></span>
+          <span class="row-txt"><span class="row-k">GitHub</span><span class="row-v">KARTHICK-A</span></span><span class="sr"> (opens in a new tab)</span>
+        </a>
+        <button class="icon-btn copy" type="button" data-copy="https://github.com/KARTHICK-A" data-label="GitHub link" aria-label="Copy github link"><svg class="i i-copy" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg><svg class="i i-check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+      </li>
+    </ul></div>
+      <div class="card"><h3>Documents</h3><ul class="rows">
+      <li class="row">
+        <a class="row-main" href="Karthick-A-details.pdf" download>
+          <span class="row-ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-file"/></svg></span>
+          <span class="row-txt"><span class="row-k">Profile</span><span class="row-v">One-page profile · PDF</span></span>
+        </a>
+        <button class="icon-btn copy" type="button" data-copy="https://karthick-card.vercel.app/Karthick-A-details.pdf" data-label="Profile PDF link" aria-label="Copy profile pdf link"><svg class="i i-copy" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg><svg class="i i-check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+      </li>
+      <li class="row">
+        <a class="row-main" href="Karthick-A-resume.pdf" download>
+          <span class="row-ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-file"/></svg></span>
+          <span class="row-txt"><span class="row-k">Résumé</span><span class="row-v">Karthick-A-resume.pdf</span></span>
+        </a>
+        <button class="icon-btn copy" type="button" data-copy="https://karthick-card.vercel.app/Karthick-A-resume.pdf" data-label="Résumé link" aria-label="Copy résumé link"><svg class="i i-copy" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg><svg class="i i-check" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
+      </li>
+    </ul></div>
+    </div>
+  </div>
+</section>
 </main>
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div class="foot-id"><strong>Karthick A</strong><span>Embedded Systems Engineer · Spark Invotech Pvt Ltd</span></div>
+    <nav aria-label="Footer"><a href="index.html">Card</a><a href="work.html">Work</a><a href="about.html">About</a><a href="print.html">Print sheet</a></nav>
+    <p class="fine">Works offline once loaded. No tracking, no third-party requests.</p>
+  </div>
+</footer>
 <p class="toast" id="toast" role="status" aria-live="polite" hidden></p>
-
-<script src="vendor/qrcode.js"></script>
-<script>
-(function(){
-  var CRLF='\r\n';
-  var VCARD=['BEGIN:VCARD','VERSION:3.0','N:A;Karthick;;;','FN:Karthick A',
-    'TITLE:Embedded Systems Engineer','ORG:Spark Invotech Pvt Ltd',
-    'TEL:+917094828457','EMAIL:karthick.rd.dev@gmail.com',
-    'EMAIL:sparkinvotech.ceo@gmail.com',
-    'URL:https://karthick-a.github.io/portfolio/','END:VCARD'].join(CRLF)+CRLF;
-  var PAGE=(location.origin+location.pathname).replace(/index\.html$/,'');
-  var mode='vcard';
-
-  function build(text){var c=qrcode(0,'M');c.addData(text,'Byte');c.make();return c}
-  // Always dark-on-white: inverted codes fail on a lot of scanners.
-  function paint(cv,code,px){
-    var n=code.getModuleCount(), q=4, size=(n+q*2)*px;
-    cv.width=size; cv.height=size;
-    var g=cv.getContext('2d');
-    g.fillStyle='#fff'; g.fillRect(0,0,size,size);
-    g.fillStyle='#000';
-    for(var r=0;r<n;r++)for(var c=0;c<n;c++)
-      if(code.isDark(r,c)) g.fillRect((c+q)*px,(r+q)*px,px,px);
-    return n;
-  }
-  var meta=document.getElementById('qrmeta'), name=document.getElementById('qrname');
-  function render(){
-    var code=build(mode==='vcard'?VCARD:PAGE);
-    var n=paint(document.getElementById('qr'),code,8);
-    name.textContent = mode==='vcard' ? 'CONTACT CARD' : 'THIS PAGE';
-    meta.textContent = 'v'+((n-17)/4)+' · ECC M';
-  }
-  var tv=document.getElementById('tab-vcard'), tu=document.getElementById('tab-url');
-  function setMode(m){
-    mode=m;
-    tv.setAttribute('aria-pressed',String(m==='vcard'));
-    tu.setAttribute('aria-pressed',String(m==='url'));
-    render();
-  }
-  tv.onclick=function(){setMode('vcard')}; tu.onclick=function(){setMode('url')};
-
-  var toast=document.getElementById('toast'), tt;
-  function say(msg){ toast.textContent=msg; toast.hidden=false;
-    clearTimeout(tt); tt=setTimeout(function(){toast.hidden=true},2400) }
-
-  function copy(text,btn,label){
-    var ok=function(){
-      say(label+' copied');
-      if(btn){ btn.dataset.done='true'; setTimeout(function(){delete btn.dataset.done},1600) }
-    };
-    var no=function(){ say('Copy failed — '+text) };
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(ok,no);
-    } else {
-      var t=document.createElement('textarea'); t.value=text; document.body.appendChild(t);
-      t.select(); try{document.execCommand('copy');ok()}catch(e){no()}
-      document.body.removeChild(t);
-    }
-  }
-  var btns=document.querySelectorAll('.copy');
-  for(var i=0;i<btns.length;i++)(function(b){
-    b.addEventListener('click',function(){
-      var row=b.parentNode.querySelector('.lk');
-      copy(b.getAttribute('data-copy'),b,row?row.textContent.trim():'Value');
-    });
-  })(btns[i]);
-
-  render();
-  if('serviceWorker' in navigator){
-    addEventListener('load',function(){ navigator.serviceWorker.register('sw.js')['catch'](function(){}) });
-  }
-})();
-</script>
+<script src="assets/site.js" defer></script>
 </body>
 </html>

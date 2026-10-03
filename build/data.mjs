@@ -1,6 +1,9 @@
-// Single source of truth for the contact card.
-// Every value here was taken from the owner's own published portfolio
-// (index.html JSON-LD, README.md) — nothing is invented.
+// Single source of truth for the contact card: the vCard, the print sheet, the
+// profile PDF and every page are generated from this file and build/content.mjs.
+//
+// Name, role, phone, location and links match the owner's published portfolio.
+// The two email addresses are the ones chosen for the card; the portfolio's own
+// JSON-LD lists a different address, so confirm which is current if in doubt.
 
 export const CARD_URL =
   process.env.CARD_URL || 'https://karthick-card.vercel.app/';
@@ -63,12 +66,21 @@ export const vcardFile = [
   'END:VCARD',
 ].join('\r\n') + '\r\n';
 
-export const links = [
-  { label: 'Email',    sub: person.email,              href: `mailto:${person.email}`, ext: false },
-  { label: 'Business', sub: person.emailBiz,           href: `mailto:${person.emailBiz}`, ext: false },
-  { label: 'Phone',    sub: person.phone,              href: `tel:${person.phoneDigits}`, ext: false },
-  { label: 'WhatsApp', sub: person.phone,              href: `https://wa.me/${person.whatsapp}`, ext: true },
-  { label: 'Website',  sub: 'karthick-a.github.io/portfolio', href: person.website, ext: true },
-  { label: 'LinkedIn', sub: 'in/karthick-a-83a352211', href: person.linkedin, ext: true },
-  { label: 'GitHub',   sub: 'KARTHICK-A',              href: person.github, ext: true },
+// Rows for the contact page sections. `copy` is what the COPY button puts on
+// the clipboard; documents copy their absolute URL so it can be pasted into a chat.
+const abs = (path) => CARD_URL + path;
+export const contactRows = [
+  { k: 'Email · technical', v: person.email,    href: `mailto:${person.email}`,    copy: person.email,        icon: 'mail',  copyLabel: 'Technical email' },
+  { k: 'Email · business',  v: person.emailBiz, href: `mailto:${person.emailBiz}`, copy: person.emailBiz,     icon: 'mail',  copyLabel: 'Business email' },
+  { k: 'Phone',             v: person.phone,    href: `tel:${person.phoneDigits}`, copy: person.phoneDigits,  icon: 'phone', copyLabel: 'Phone number' },
+  { k: 'WhatsApp',          v: person.phone,    href: `https://wa.me/${person.whatsapp}`, copy: person.phoneDigits, icon: 'chat', copyLabel: 'WhatsApp number', ext: true },
+];
+export const linkRows = [
+  { k: 'Portfolio', v: 'karthick-a.github.io/portfolio', href: person.website,  copy: person.website,  icon: 'globe', copyLabel: 'Portfolio link', ext: true },
+  { k: 'LinkedIn',  v: 'in/karthick-a-83a352211',        href: person.linkedin, copy: person.linkedin, icon: 'briefcase', copyLabel: 'LinkedIn link', ext: true },
+  { k: 'GitHub',    v: 'KARTHICK-A',                     href: person.github,   copy: person.github,   icon: 'code',  copyLabel: 'GitHub link', ext: true },
+];
+export const docRows = [
+  { k: 'Profile', v: 'One-page profile · PDF', href: 'Karthick-A-details.pdf', copy: abs('Karthick-A-details.pdf'), icon: 'file', copyLabel: 'Profile PDF link', download: true },
+  { k: 'Résumé',  v: 'Karthick-A-resume.pdf',  href: 'Karthick-A-resume.pdf',  copy: abs('Karthick-A-resume.pdf'),  icon: 'file', copyLabel: 'Résumé link',     download: true },
 ];

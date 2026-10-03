@@ -2,7 +2,7 @@
 import { writeFileSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { make } from './build.mjs';
+import { make } from './qr.mjs';
 import { CARD_URL, person, vcardQR } from './data.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');

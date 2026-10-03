@@ -1,44 +1,22 @@
-// Generates contact.vcf, print.html, sw.js from card/build/data.mjs.
-// Run:  node card/build/build.mjs        (optionally CARD_URL=... to re-point the page QR)
-import { createRequire } from 'node:module';
-import { writeFileSync, readFileSync, readdirSync } from 'node:fs';
+// Generates everything that is cheap and deterministic:
+//   contact.vcf · print.html · the site pages (see site.mjs) · sw.js
+// Run:  node build/build.mjs        (optionally CARD_URL=... to re-point the printed codes)
+import { writeFileSync, readFileSync, readdirSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CARD_URL, person, vcardQR, vcardFile } from './data.mjs';
+import { make, version, qrSvg } from './qr.mjs';
+import { buildSite } from './site.mjs';
+import { projects } from './content.mjs';
 
-const require = createRequire(import.meta.url);
+export { make, version };   // kept for scripts that still import them from here
+
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const qrcode = require(join(ROOT, 'vendor/qrcode.js'));
-
-export function make(text) {
-  const c = qrcode(0, 'M');
-  c.addData(text, 'Byte');
-  c.make();
-  return c;
-}
-export const version = (c) => (c.getModuleCount() - 17) / 4;
-
-// Inline SVG, one <rect> per run of dark modules — small file, exact edges,
-// resolution-independent so it prints as crisply as the printer allows.
-function svg(code, mm, id, label) {
-  const n = code.getModuleCount(), q = 4, side = n + q * 2;
-  let d = '';
-  for (let r = 0; r < n; r++) {
-    let run = 0;
-    for (let c = 0; c <= n; c++) {
-      const dark = c < n && code.isDark(r, c);
-      if (dark) { run++; continue; }
-      if (run) { d += `M${c - run + q} ${r + q}h${run}v1h-${run}z`; run = 0; }
-    }
-  }
-  return `<svg class="qr" role="img" aria-label="${label}" width="${mm}mm" height="${mm}mm" `
-    + `viewBox="0 0 ${side} ${side}" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">`
-    + `<rect width="${side}" height="${side}" fill="#fff"/><path fill="#000" d="${d}"/></svg>`;
-}
 
 const qrCard = make(vcardQR);
 const qrPage = make(CARD_URL);
+const code = (c, mm, label) => qrSvg(c, { mm, label, cls: 'qr' });
 
 writeFileSync(join(ROOT, 'contact.vcf'), vcardFile, 'utf8');
 
@@ -49,11 +27,13 @@ const print = `<!doctype html>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Print sheet — Karthick A</title>
+<link rel="icon" href="assets/img/icons/icon.svg" type="image/svg+xml">
 <style>
   @page{size:A4;margin:12mm}
   html{background:#f2f4f8}
   body{margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#000;font-size:10pt}
   .sheet{background:#fff;max-width:186mm;margin:0 auto;padding:10mm}
+  .back{display:inline-block;margin:0 0 6mm;padding:2mm 0;color:#0a6f79;font-size:9pt}
   h1{font-size:12pt;margin:0 0 2mm}
   p.note{font-size:8.5pt;color:#444;margin:0 0 8mm;max-width:120mm}
   .piece{border:0.2mm dashed #9aa;padding:4mm;margin:0 0 10mm;display:inline-block;vertical-align:top}
@@ -64,13 +44,16 @@ const print = `<!doctype html>
   .tent{width:148mm;padding:8mm;text-align:center}
   .tent .who{font-size:13pt;line-height:1.5;margin:0 0 5mm}
   .tent .who b{font-size:20pt;display:block}
+  .tent .who.sm{font-size:9pt;margin:4mm 0 0}
   .qr{display:block}
   .tent .qr{margin:0 auto}
-  @media print{html,body{background:#fff}.sheet{padding:0;max-width:none}.piece{border-color:#ccc}}
+  @media screen and (max-width:720px){.sheet{padding:5mm}.piece{display:block;max-width:100%;overflow-x:auto}}
+  @media print{html,body{background:#fff}.sheet{padding:0;max-width:none}.piece{border-color:#ccc}.back{display:none}}
 </style>
 </head>
 <body>
 <div class="sheet">
+  <a class="back" href="index.html">Back to the card</a>
   <h1>Karthick A — print sheet</h1>
   <p class="note">Print at 100% scale (no "fit to page"), on A4. Dashed rules are cut guides, not crop
   marks — trim just inside them so no line remains. Codes are vector, so they print at the full
@@ -79,7 +62,7 @@ const print = `<!doctype html>
 
   <figure class="piece">
     <div class="card">
-      ${svg(qrCard, 28, 'card', 'Contact QR code for Karthick A')}
+      ${code(qrCard, 28, 'Contact QR code for Karthick A')}
       <div class="who"><b>Karthick A</b>Embedded Systems Engineer<br>Spark Invotech Pvt Ltd<br>
       ${person.phone}<br>${person.email}</div>
     </div>
@@ -89,16 +72,16 @@ const print = `<!doctype html>
   <figure class="piece">
     <div class="tent">
       <p class="who"><b>Karthick A</b>Embedded Systems Engineer · Spark Invotech Pvt Ltd</p>
-      ${svg(qrCard, 60, 'tent', 'Contact QR code for Karthick A')}
-      <p class="who" style="font-size:9pt;margin:4mm 0 0">SCAN TO SAVE MY CONTACT</p>
+      ${code(qrCard, 60, 'Contact QR code for Karthick A')}
+      <p class="who sm">SCAN TO SAVE MY CONTACT</p>
     </div>
     <figcaption>A5 TABLE TENT — CONTACT CODE</figcaption>
   </figure>
 
   <figure class="piece">
     <div class="tent">
-      ${svg(qrPage, 60, 'page', 'QR code linking to the contact page of Karthick A')}
-      <p class="who" style="font-size:9pt;margin:4mm 0 0">ALL MY LINKS<br>${CARD_URL.replace(/^https?:\/\//, '')}</p>
+      ${code(qrPage, 60, 'QR code linking to the contact page of Karthick A')}
+      <p class="who sm">ALL MY LINKS<br>${CARD_URL.replace(/^https?:\/\//, '')}</p>
     </div>
     <figcaption>A5 TABLE TENT — PAGE LINK CODE</figcaption>
   </figure>
@@ -108,34 +91,57 @@ const print = `<!doctype html>
 `;
 writeFileSync(join(ROOT, 'print.html'), print, 'utf8');
 
-// Cache version is derived from the files themselves, so shipping a change
+// Pages, sitemap, robots, manifest.
+const pages = buildSite();
+
+// ---- offline cache ----------------------------------------------------------
+// CORE is fetched at install (all-or-nothing, small). EXTRA is best-effort: the
+// card thumbnails. Full-size photos are cached the first time they are opened.
+// The cache version is derived from the files themselves, so shipping a change
 // always invalidates the old cache and never needs a manual bump.
-const assets = ['index.html', 'print.html', 'contact.vcf', 'og.png', 'portrait.webp', 'details.html', 'Karthick-A-details.pdf',
-  'Karthick-A-resume.pdf',
-  'vendor/qrcode.js', ...readdirSync(join(ROOT, 'fonts')).map((f) => 'fonts/' + f)];
+const walk = (dir) => readdirSync(join(ROOT, dir), { withFileTypes: true })
+  .flatMap((d) => d.isDirectory() ? walk(join(dir, d.name)) : [join(dir, d.name)]);
+const core = [
+  ...pages, 'print.html', 'contact.vcf', 'og.png', 'portrait.webp', 'manifest.webmanifest',
+  'Karthick-A-details.pdf', 'Karthick-A-resume.pdf',
+  'assets/site.css', 'assets/site.js', 'assets/theme.js', 'assets/img/icons/icon.svg', 'assets/img/icons/icon-192.png',
+  'vendor/qrcode.js', ...walk('fonts').filter((f) => f.endsWith('.woff2')),
+];
+const extra = [...new Set(projects.flatMap((p) => p.photos.map((ph) => ph.srcSm)))];
 const h = createHash('sha256');
-for (const a of assets) { try { h.update(readFileSync(join(ROOT, a))); } catch { h.update(a); } }
+for (const a of [...core, ...extra]) h.update(existsSync(join(ROOT, a)) ? readFileSync(join(ROOT, a)) : a);
 const CACHE = 'karthick-card-' + h.digest('hex').slice(0, 10);
 
-writeFileSync(join(ROOT, 'sw.js'), `// generated by card/build/build.mjs — do not edit
+writeFileSync(join(ROOT, 'sw.js'), `// generated by build/build.mjs — do not edit
 const CACHE='${CACHE}';
-const ASSETS=${JSON.stringify(['./', ...assets], null, 0)};
+const CORE=${JSON.stringify(['./', ...core])};
+const EXTRA=${JSON.stringify(extra)};
 self.addEventListener('install',e=>{
   self.skipWaiting();
-  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).catch(()=>{}));
+  e.waitUntil(caches.open(CACHE).then(async c=>{
+    await c.addAll(CORE);
+    await Promise.allSettled(EXTRA.map(u=>c.add(u)));
+  }).catch(()=>{}));
 });
 self.addEventListener('activate',e=>{
   e.waitUntil(caches.keys().then(ks=>Promise.all(
     ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));
 });
+const keep=(req,res)=>{ if(res.ok){ const copy=res.clone(); caches.open(CACHE).then(c=>c.put(req,copy)); } return res; };
 self.addEventListener('fetch',e=>{
-  if(e.request.method!=='GET')return;
-  e.respondWith(caches.match(e.request).then(hit=>hit||fetch(e.request).then(res=>{
-    const copy=res.clone();
-    if(res.ok&&new URL(e.request.url).origin===location.origin)
-      caches.open(CACHE).then(c=>c.put(e.request,copy));
-    return res;
-  }).catch(()=>caches.match('./'))));
+  const req=e.request;
+  if(req.method!=='GET'||req.headers.has('range'))return;
+  if(new URL(req.url).origin!==location.origin)return;
+  if(req.mode==='navigate'){
+    // Pages: network first so a redeploy shows up immediately, but never wait
+    // more than 3.5 s on bad conference wifi — fall back to the cached copy.
+    e.respondWith(new Promise((ok,no)=>{
+      const t=setTimeout(no,3500);
+      fetch(req).then(r=>{clearTimeout(t);ok(r);},err=>{clearTimeout(t);no(err);});
+    }).then(r=>keep(req,r)).catch(()=>caches.match(req).then(hit=>hit||caches.match('index.html'))));
+    return;
+  }
+  e.respondWith(caches.match(req).then(hit=>hit||fetch(req).then(r=>keep(req,r))));
 });
 `, 'utf8');
 
@@ -143,4 +149,5 @@ console.log('contact QR : version %d, %d modules, %d bytes',
   version(qrCard), qrCard.getModuleCount(), Buffer.byteLength(vcardQR));
 console.log('page QR    : version %d, %d modules — %s',
   version(qrPage), qrPage.getModuleCount(), CARD_URL);
-console.log('cache      :', CACHE);
+console.log('pages      : %d  (%s)', pages.length, pages.join(', '));
+console.log('cache      :', CACHE, `(${core.length} core + ${extra.length} extra files)`);
